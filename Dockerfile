@@ -28,8 +28,11 @@ RUN source ../venv/bin/activate && pip install -r requirements.txt
 # Expose the port
 EXPOSE $CODE_SERVER_PORT
 
-# Use ENTRYPOINT to start code-server on the specified or default port and with the cloned project
-ENTRYPOINT ["code-server", "--bind-addr", "0.0.0.0:${CODE_SERVER_PORT}", "--auth", "none", "--disable-telemetry", "--disable-update-check", "./project"]
+# Create start.sh script
+RUN echo "#!/bin/bash\n\
+code-server --bind-addr 0.0.0.0:${1} --auth none --disable-telemetry --disable-update-check --extensions-dir /home/coder/.local/share/code-server/extensions ./project" > start.sh && chmod +x start.sh
+
+ENTRYPOINT ["./start.sh", "$CODE_SERVER_PORT"]
 
 # USAGE:
 # docker build -t scarduzio/code-streamlit .
