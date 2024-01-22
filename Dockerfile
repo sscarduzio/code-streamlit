@@ -9,26 +9,22 @@ RUN sudo apt-get update && sudo apt-get install -y python3.11 python3-pip python
 
 WORKDIR /
 
-# Install VS Code extensions
+RUN git clone $GIT_REPO_URL /app
+
+WORKDIR /app
+
+RUN python3 -mvenv venv
 RUN code-server --install-extension ms-kubernetes-tools.vscode-kubernetes-tools \
     && code-server --install-extension ms-python.python \
     && code-server --install-extension whitphx.vscode-stlite \
     && code-server --install-extension ms-python.vscode-pylance 
 
-# Clone the specified Git repository
-RUN git clone ${GIT_REPO_URL} /app
-
-WORKDIR /app
-
-RUN python3 -mvenv venv
-
-# Use bash
-RUN source ./venv/bin/activate && pip install -r requirements.txt
+COPY start.sh /app
+RUN chmod +x /app/start.sh
+ENTRYPOINT ["/app/start.sh"]
 
 # Expose the port
 EXPOSE $CODE_SERVER_PORT
-
-CMD code-server --bind-addr 0.0.0.0:${CODE_SERVER_PORT} --auth none --disable-telemetry --disable-update-check --extensions-dir /app/.local/share/code-server/extensions /app
 
 # USAGE:
 # docker build -t scarduzio/code-streamlit .
