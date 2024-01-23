@@ -8,6 +8,7 @@ USER root
 RUN sudo apt-get update && sudo apt-get install -y python3.11 python3-pip python3-venv git 
 
 WORKDIR /
+
 RUN git clone $GIT_REPO_URL /app
 
 WORKDIR /app
