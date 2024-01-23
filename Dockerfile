@@ -5,7 +5,7 @@ SHELL ["/bin/bash" , "-c"]
 ENV CODE_SERVER_PORT=8080
 ENV GIT_REPO_URL=https://github.com/streamlit/streamlit-example
 USER root
-RUN sudo apt-get update && sudo apt-get install -y python3.11 python3-pip python3-venv git 
+RUN sudo apt-get update && sudo apt-get install -y python3.11 python3-pip python3-venv git unzip
 
 WORKDIR /
 
