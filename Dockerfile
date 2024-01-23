@@ -19,8 +19,8 @@ RUN code-server --install-extension ms-kubernetes-tools.vscode-kubernetes-tools 
     && code-server --install-extension whitphx.vscode-stlite \
     && code-server --install-extension ms-python.vscode-pylance 
 
-COPY start.sh /app
-RUN chmod +x /app/start.sh
+COPY main.sh /app
+RUN chmod +x /app/main.sh
 ENTRYPOINT ["/app/main.sh"]
 
 # Expose the port
