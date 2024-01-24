@@ -19,7 +19,7 @@ RUN code-server --install-extension ms-kubernetes-tools.vscode-kubernetes-tools 
     && code-server --install-extension whitphx.vscode-stlite \
     && code-server --install-extension ms-python.vscode-pylance 
 
-COPY settings.json ~/.local/share/code-server/User/settings.json
+COPY settings.json /root/.local/share/code-server/User
 
 COPY main.sh /app
 RUN chmod +x /app/main.sh
