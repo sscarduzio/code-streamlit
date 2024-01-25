@@ -18,7 +18,7 @@ RUN python3 -mvenv venv
 RUN source venv/bin/activate
 RUN source venv/bin/activate && python -m pip install --upgrade pip
 RUN source venv/bin/activate && python -m pip install streamlit streamlit_folium folium spacy streamlit_octostar_research \
-transformer openai streamlit_scrollable_textbox ultralytics easyocr scikit-learn deepface polyglot img2vec_pytorch
+transformers openai streamlit_scrollable_textbox ultralytics easyocr scikit-learn deepface polyglot img2vec_pytorch
 
 RUN code-server --install-extension ms-kubernetes-tools.vscode-kubernetes-tools \
     && code-server --install-extension ms-python.python \
