@@ -1,5 +1,6 @@
 {
     "workbench.colorTheme": "Default Light Modern",
     "editor.minimap.enabled": false,
-    "terminal.integrated.sendKeybindingsToShell": true
+    "terminal.integrated.sendKeybindingsToShell": true,
+    "security.workspace.trust.enabled": false
 }
