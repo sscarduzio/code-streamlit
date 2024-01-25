@@ -31,11 +31,11 @@ RUN code-server --install-extension ms-kubernetes-tools.vscode-kubernetes-tools 
     && code-server --install-extension ms-toolsai.jupyter-vscode-tests \
     && code-server --install-extension GitHub.vscode-pull-request-github
 
-COPY settings.json /root/.local/share/code-server/User
+COPY init/settings.json /root/.local/share/code-server/User
 
-COPY main.sh /app
-RUN chmod +x /app/main.sh
-ENTRYPOINT ["/app/main.sh"]
+COPY init/main.sh /app/init
+RUN chmod +x /app/init/main.sh
+ENTRYPOINT ["/app/init/main.sh"]
 
 # Expose the port
 EXPOSE $CODE_SERVER_PORT

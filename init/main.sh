@@ -1,4 +1,5 @@
 #!/bin/bash
+cd /app
 echo "Starting the code server on port $CODE_SERVER_PORT for repo $GIT_REPO_URL"
 
 source ./venv/bin/activate
