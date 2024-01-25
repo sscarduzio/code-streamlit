@@ -16,8 +16,8 @@ WORKDIR /app
 
 RUN python3 -mvenv venv
 RUN source venv/bin/activate
-RUN python3 -m pip install --upgrade pip
-RUN python3 -m pip install streamlit streamlit_folium folium spacy streamlit_octostar_research \
+RUN source venv/bin/activate && python -m pip install --upgrade pip
+RUN source venv/bin/activate && python -m pip install streamlit streamlit_folium folium spacy streamlit_octostar_research \
 transformer openai streamlit_scrollable_textbox ultralytics easyocr scikit-learn deepface polyglot img2vec_pytorch
 
 RUN code-server --install-extension ms-kubernetes-tools.vscode-kubernetes-tools \
