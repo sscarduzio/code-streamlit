@@ -5,7 +5,8 @@ SHELL ["/bin/bash" , "-c"]
 ENV CODE_SERVER_PORT=8080
 ENV GIT_REPO_URL=https://github.com/streamlit/streamlit-example
 USER root
-RUN sudo apt-get update && sudo apt-get install -y python3.11 python3-pip python3-venv git unzip
+RUN sudo apt-get update && sudo apt-get install -y python3.11 python3-pip python3-venv \
+curl wget git unzip build-essential libssl-dev libffi-dev python3-dev libpq-dev ffmpeg
 
 WORKDIR /
 
@@ -14,10 +15,20 @@ RUN git clone $GIT_REPO_URL /app
 WORKDIR /app
 
 RUN python3 -mvenv venv
+RUN python3 -m pip install --upgrade pip
+RUN python3 -m pip install streamlit streamlit_folium folium spacy streamlit_octostar_research \
+transformer openai streamlit_scrollable_textbox ultralytics easyocr scikit-learn deepface polyglot img2vec_pytorch
+
 RUN code-server --install-extension ms-kubernetes-tools.vscode-kubernetes-tools \
     && code-server --install-extension ms-python.python \
     && code-server --install-extension whitphx.vscode-stlite \
-    && code-server --install-extension ms-python.vscode-pylance 
+    && code-server --install-extension ms-python.vscode-pylance \
+    && code-server --install-extension ms-toolsai.jupyter \
+    && code-server --install-extension ms-toolsai.jupyter-keymap \
+    && code-server --install-extension ms-toolsai.jupyter-renderers \
+    && code-server --install-extension ms-toolsai.jupyter-renderers-vscode \
+    && code-server --install-extension ms-toolsai.jupyter-vscode-tests \
+    && code-server --install-extension GitHub.vscode-pull-request-github \
 
 COPY settings.json /root/.local/share/code-server/User
 
