@@ -6,7 +6,8 @@ ENV CODE_SERVER_PORT=8080
 ENV GIT_REPO_URL=""
 USER root
 RUN sudo apt-get update && sudo apt-get install -y python3.11 python3-pip python3-venv \
-curl wget git unzip build-essential libssl-dev libffi-dev python3-dev libpq-dev ffmpeg
+curl wget git unzip build-essential libssl-dev libffi-dev python3-dev libpq-dev ffmpeg \
+&& apt-get clean
 
 WORKDIR /
 
@@ -33,7 +34,9 @@ RUN code-server --install-extension ms-kubernetes-tools.vscode-kubernetes-tools 
 
 COPY init/settings.json /root/.local/share/code-server/User
 
+RUN mkdir -p /app/init
 COPY init/main.sh /app/init
+
 RUN chmod +x /app/init/main.sh
 ENTRYPOINT ["/app/init/main.sh"]
 
