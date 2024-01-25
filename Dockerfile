@@ -3,14 +3,14 @@ SHELL ["/bin/bash" , "-c"]
 
 # Set environment variables for the port and Git repository URL with default values
 ENV CODE_SERVER_PORT=8080
-ENV GIT_REPO_URL=https://github.com/streamlit/streamlit-example
+ENV GIT_REPO_URL=""
 USER root
 RUN sudo apt-get update && sudo apt-get install -y python3.11 python3-pip python3-venv \
 curl wget git unzip build-essential libssl-dev libffi-dev python3-dev libpq-dev ffmpeg
 
 WORKDIR /
 
-RUN git clone $GIT_REPO_URL /app
+RUN if [ -z "$GIT_REPO_URL" ]; then mkdir /app; else git clone $GIT_REPO_URL /app; fi
 
 WORKDIR /app
 
@@ -29,7 +29,7 @@ RUN code-server --install-extension ms-kubernetes-tools.vscode-kubernetes-tools 
     && code-server --install-extension ms-toolsai.jupyter-renderers \
     && code-server --install-extension ms-toolsai.jupyter-renderers-vscode \
     && code-server --install-extension ms-toolsai.jupyter-vscode-tests \
-    && code-server --install-extension GitHub.vscode-pull-request-github \
+    && code-server --install-extension GitHub.vscode-pull-request-github
 
 COPY settings.json /root/.local/share/code-server/User
 
