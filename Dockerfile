@@ -9,6 +9,16 @@ RUN sudo apt-get update && sudo apt-get install -y python3.11 python3-pip python
 curl wget git unzip build-essential libssl-dev libffi-dev python3-dev libpq-dev ffmpeg \
 && apt-get clean
 
+# Install NVIDIA container toolkit
+RUN curl -fsSL https://nvidia.github.io/libnvidia-container/gpgkey | gpg --dearmor -o /usr/share/keyrings/nvidia-container-toolkit-keyring.gpg \
+  && curl -s -L https://nvidia.github.io/libnvidia-container/stable/deb/nvidia-container-toolkit.list | \
+    sed 's#deb https://#deb [signed-by=/usr/share/keyrings/nvidia-container-toolkit-keyring.gpg] https://#g' | \
+    tee /etc/apt/sources.list.d/nvidia-container-toolkit.list \
+  && \
+    apt-get update
+RUN apt-get install -y nvidia-container-toolkit
+
+
 WORKDIR /
 
 RUN if [ -z "$GIT_REPO_URL" ]; then mkdir /app; else git clone $GIT_REPO_URL /app; fi
