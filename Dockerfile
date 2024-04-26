@@ -36,7 +36,6 @@ transformers openai streamlit_scrollable_textbox ultralytics easyocr scikit-lear
 RUN code-server --install-extension ms-kubernetes-tools.vscode-kubernetes-tools \
     && code-server --install-extension ms-python.python \
     && code-server --install-extension whitphx.vscode-stlite \
-    && code-server --install-extension ms-python.vscode-pylance \
     && code-server --install-extension ms-toolsai.jupyter \
     && code-server --install-extension ms-toolsai.jupyter-keymap \
     && code-server --install-extension ms-toolsai.jupyter-renderers \
