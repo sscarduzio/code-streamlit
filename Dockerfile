@@ -1,6 +1,8 @@
 FROM codercom/code-server:latest
 SHELL ["/bin/bash" , "-c"]
 
+RUN date +%Y-%m-%d_%H:%M:%S > /tmp/IMAGE_BUILD_TIME
+
 # Set environment variables for the port and Git repository URL with default values
 ENV CODE_SERVER_PORT=8080
 ENV GIT_REPO_URL=""
